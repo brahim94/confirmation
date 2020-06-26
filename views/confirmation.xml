@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id='confirmation_commande_view_form' model='ir.ui.view'>
+            <field name="name">confirmation.commande.form</field>
+            <field name="model">commande.confirmation</field>
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                    <div class='oe_title'>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group col="2">
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="ville"/>
+                                <field name="write_date"/>
+                            </group>
+                            <group>
+                               <field name="offer_number"/>
+                                <field name="offer_reception_date"/>
+                            </group>
+                        </group>
+                         <notebook>
+                        <page string="Articles">
+                            <field name="comande_line">
+                            <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="product_unit"/>
+                            <field name="product_qut"/>
+                            <field name="price_unit"/>
+                            <field name="untaxed_total"/>
+                            <field name="taxes_id" widget="many2many_tags"/>
+                            <field name="taxed_total"/>
+                            </tree>
+                            </field>
+                        </page>
+                        <page string="Détails">
+                            <group>
+                                <group name="planning">
+                                        <field name="delai"/>
+                                        <field name="payment_term_id"/>
+                                </group>
+                                <group name="other_info">
+                                    <field name="user_id"/>
+                                    <field name="poste"/>
+                                </group>
+                            </group>
+                        </page>
+                        </notebook>
+                </sheet>
+             </form>
+            </field>
+        </record>
+
+        <record id="confirmation_commande_view_tree" model="ir.ui.view">
+            <field name="name">confirmation.commande.tree</field>
+            <field name="model">commande.confirmation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="write_date"/>
+                </tree> 
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="confirmation_commande_action">
+            <field name="name">Confirmation commande</field>
+            <field name="res_model">commande.confirmation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                    <p class="oe_view_nocontent_smiling_face"> créer votre première Commande </p>
+            </field>
+        </record>
+
+         <menuitem name="Commandes" 
+        id="menu_root" 
+        sequence="115" 
+        groups="base.group_user" 
+        web_icon="confirmation,static/description/icon.png"/>
+
+        <menuitem name="Commandes"  
+        parent="menu_root" 
+        id="confirmation_commande_menu" 
+        sequence="100" 
+        action="confirmation_commande_action"
+        groups ="base.group_user"/>
+
+        </odoo>

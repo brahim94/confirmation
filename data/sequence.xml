@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="confirmation_commande_order" model="ir.sequence">
+            <field name="name">Confirmation commande order</field>
+            <field name="code">commande.order</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+  </data>
+</odoo>

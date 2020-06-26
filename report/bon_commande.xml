@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<report
+		id="action_bon_commande"
+		string="Bon de cammande"
+		model="commande.confirmation"
+		report_type="qweb-pdf"
+		name="confirmation.commande"
+		print_report_name="'Bon de commande'"/>
+
+        <template id="commande">
+             <t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+			<t t-call="web.external_layout">
+
+                <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                </style>
+
+                 <div style="position:absolute;left:570.99px;top:5.98px">
+				<span>Casablanca, le <span t-field="o.write_date"/></span>
+			 	</div>
+
+				<div style="position:absolute;left:570.99px;top:77.98px">
+				<span t-field="o.partner_id"/>
+			 	</div>
+
+				<div style="position:absolute;left:570.99px;top:97.98px">
+				<span t-field="o.ville"/>
+			 	</div>
+
+                <div style="position:absolute;top:170.62px">
+			 	<h4><u>Objet</u> : CONFIRMATION COMMANDE N°: <span t-field="o.name"/></h4>
+			 	</div>
+
+                <div style="position:absolute;top:240.62px">
+			 	Monsieur, Madame
+			 	</div>
+
+				<div style="position:relative;top:300.26px">
+				Suite à votre Offre No. <span t-field="o.offer_number"/> du <span t-field="o.offer_reception_date"/> nous vous confirmons notre commande de :
+				</div>
+
+                 <table style="position:absolute;top:360px" width="90%">
+                    <tr>
+                        <th style="text-align: center; width:10%;border-top: none">P</th>
+                        <th style="text-align: center;border-top: none">Désignation</th>
+                        <th style="text-align: center;border-top: none">Unité</th>
+                        <th style="text-align: center;border-top: none">Qté</th>
+                        <th style="text-align: center;border-top: none">P.U HT</th>
+                    </tr>
+                         <t t-foreach="o.comande_line" t-as="comande_line">
+                         <tr>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">1</td>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.product_id"/></td>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.product_unit"/></td>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.product_qut"/></td>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.price_unit"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: right;border-bottom: none;padding:0px; margin:0px">Total HT</th>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.untaxed_total"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: right;border-bottom: none;padding:0px; margin:0px">Total TTC</th>
+                            <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"><span t-field="comande_line.taxed_total"/></td>
+                        </tr>
+                        </t>
+                </table>
+
+                <div style="position:relative;top:480px" class="cls_004">
+                    <p><i><u>DELAIS:  </u></i><span t-field="o.delai"/></p>
+                    <p><i><u>PAIEMENT:  </u></i><span t-field="o.payment_term_id"/></p>
+                    <p><i><u>LIVRAISON :  </u></i><span t-field="o.delivery"/></p>
+			    </div>
+
+                <div style="position:relative;top:540px" class="cls_004">
+				Veuillez agréer Monsieur, l’expression de nos sentiments distingués.
+			    </div>
+
+
+                <div style="position:absolute;left:570.99px;top:820px;text-align:center;" class="cls_004">
+				<span t-field="o.user_id"/><p><span t-field="o.poste"/></p>
+			    </div>
+
+
+            </t>
+            </t>
+            </t>
+         </template>
+
+</odoo>
